@@ -1,5 +1,5 @@
 
-public abstract Account implements IAccount {
+public abstract class Account implements IAccount {
     private static int AGENCY_NUMBER = 1;
     private static int ACCOUNT_NUMBER = 1;
     
@@ -19,7 +19,7 @@ public abstract Account implements IAccount {
         this._amount += amount;
     };
 
-    public void withdraw(double amount){
+    public void withdraw(double amount) throws Exception {
         if(this._amount >= amount){
             this._amount -= amount;
             return;
@@ -41,5 +41,9 @@ public abstract Account implements IAccount {
 
     public IUser getUser(){
         return this._user;
+    };
+
+    public String getAccountNumber(){
+        return this._accountNumber;
     };
 }

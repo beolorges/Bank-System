@@ -1,8 +1,10 @@
+
+import javax.swing.JOptionPane;
 public class Client implements IClient {
     private static IBank _bank;
 
-    private Client() {
-        this._bank = new Bank();
+    public Client() {
+        _bank = new Bank();
     }
 
     private void createAccount() {
@@ -19,12 +21,12 @@ public class Client implements IClient {
         
         do{
             switch(accountTypeSwitch){
-                case 1:
+                case "1":
                     accountType = "SavingsAccount";
                     validAccountType = true;
                     break;
 
-                case 2:
+                case "2":
                     accountType = "CurrencyAccount";
                     validAccountType = true;
                     break;
@@ -36,7 +38,7 @@ public class Client implements IClient {
         }while(!validAccountType);
 
         try {
-            this._bank.createAccount(name, cpf, rg, birthDate, phoneNumber, address, password, accountType);
+            _bank.createAccount(name, cpf, rg, birthDate, phoneNumber, address, password, accountType);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -49,8 +51,8 @@ public class Client implements IClient {
         String password = JOptionPane.showInputDialog("Password: ");
         String accountNumber = JOptionPane.showInputDialog("Account number: ");
         try {
-            IAccount account = this._bank.getAccount(cpf, password, accountNumber);
-            this._bank.deleteAccount(cpf, password, account);
+            IAccount account = _bank.getAccount(cpf, password, accountNumber);
+            _bank.deleteAccount(cpf, password, account);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -65,8 +67,8 @@ public class Client implements IClient {
         String accountNumber = JOptionPane.showInputDialog("Account number: ");
         double amount = Double.parseDouble(JOptionPane.showInputDialog("Amount: "));
         try {
-            IAccount account = this._bank.getAccount(cpf, password, accountNumber);
-            this._bank.deposit(cpf, password, amount, account);
+            IAccount account = _bank.getAccount(cpf, password, accountNumber);
+            _bank.deposit(cpf, password, amount, account);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -80,8 +82,8 @@ public class Client implements IClient {
         String accountNumber = JOptionPane.showInputDialog("Account number: ");
         double amount = Double.parseDouble(JOptionPane.showInputDialog("Amount: "));
         try {
-            IAccount account = this._bank.getAccount(cpf, password, accountNumber);
-            this._bank.withdraw(cpf, password, amount, account);
+            IAccount account = _bank.getAccount(cpf, password, accountNumber);
+            _bank.withdraw(cpf, password, amount, account);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -94,8 +96,8 @@ public class Client implements IClient {
         String password = JOptionPane.showInputDialog("Password: ");
         String accountNumber = JOptionPane.showInputDialog("Account number: ");
         try {
-            IAccount account = this._bank.getAccount(cpf, password, accountNumber);
-            double balance = this._bank.getBalance(cpf, password, account);
+            IAccount account = _bank.getAccount(cpf, password, accountNumber);
+            double balance = _bank.getBalance(cpf, password, account);
             JOptionPane.showMessageDialog(null, "Balance: " + balance);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -107,51 +109,51 @@ public class Client implements IClient {
         String password = JOptionPane.showInputDialog("Password: ");
         String accountNumber = JOptionPane.showInputDialog("Account number: ");
         try {
-            IAccount account = this._bank.getAccount(cpf, password, accountNumber);
-            this._bank.printExtract(cpf, password, account);
+            IAccount account = _bank.getAccount(cpf, password, accountNumber);
+            _bank.printExtract(cpf, password, account);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
-    public menu() {
+    public void menu() {
         while(true){
 
             String option = JOptionPane.showInputDialog("1 - Create account\n2 - Delete account\n3 - Deposit\n4 - Withdraw\n5 - Get balance\n6 - Print extract\n7 - Exit\n");
             boolean validOption = false;
             do{
                 switch(option){
-                    case 1:
+                    case "1":
                         this.createAccount();
                         validOption = true;
                         break;
     
-                    case 2:
+                    case "2":
                         this.deleteAccount();
                         validOption = true;
                         break;
     
-                    case 3:
+                    case "3":
                         this.deposit();
                         validOption = true;
                         break;
     
-                    case 4:
+                    case "4":
                         this.withdraw();
                         validOption = true;
                         break;
     
-                    case 5:
+                    case "5":
                         this.getBalance();
                         validOption = true;
                         break;
     
-                    case 6:
+                    case "6":
                         this.printExtract();
                         validOption = true;
                         break;
     
-                    case 7:
+                    case "7":
                         System.exit(0);
                         validOption = true;
                         break;

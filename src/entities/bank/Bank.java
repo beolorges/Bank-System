@@ -1,27 +1,28 @@
+import java.util.ArrayList;
+
 public class Bank implements IBank{
     private ArrayList<IAccount> _accounts;
     private ArrayList<IUser> _users;
 
-    private Bank() {
+    public Bank() {
         this._accounts = new ArrayList<IAccount>();
-        this._sessions = new ArrayList<ISession>();
         this._users = new ArrayList<IUser>();
     }
 
-    public void createAccount(String name, String cpf, String rg, String birthDate, String phoneNumber, String address, String password, String accountType) throws Exception {
+    public void createAccount(String name, String cpf, String rg, String birthDate, String phoneNumber, String address, String password, String accountType, Double... initialFunds ) throws Exception {
         IUser user = new User(name, cpf, rg, birthDate, phoneNumber, address, password);
+        IAccount account = null;
         switch (accountType) {
             case "SavingsAccount":
-                IAccount account = new SavingsAccount(user);
+                account = new SavingsAccount(user, initialFunds[0]);
                 break;
 
             case "CurrencyAccount":
-                IAccount account = new CurrencyAccount(user);
+                account = new CurrencyAccount(user);
                 break;
         
             default:
                 throw new Exception("Invalid account type");
-                break;
         }
         this._accounts.add(account);
         this._users.add(user);
@@ -33,7 +34,7 @@ public class Bank implements IBank{
             throw new Exception("Invalid user");
         }
         if (this._accounts.contains(account)) {
-            if(account.getUser == user){
+            if(account.getUser() == user){
                 this._accounts.remove(account);
             }
             throw new Exception("This account doesn't belong to this user");
@@ -116,7 +117,7 @@ public class Bank implements IBank{
             throw new Exception("Invalid user");
         }
         if (this._accounts.contains(account)) {
-            if(account.getUser == user){
+            if(account.getUser() == user){
                 return;
             }
             throw new Exception("This account doesn't belong to this user");

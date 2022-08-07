@@ -11,8 +11,9 @@ public class SavingsAccount extends Account {
         this._amount += this._amount * TAX;
     }
 
-    override public void printExtract(){
-        System.out.println("--------------- Extract Savings Account --------------")
+    @Override
+    public void printExtract(){
+        System.out.println("--------------- Extract Savings Account --------------");
         super.printExtract();
         System.out.println("Your account yielded: " + (super.getBalance() - this._initialAmount));
     }
